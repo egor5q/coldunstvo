@@ -148,14 +148,14 @@ def turn(game, player):
     allcm=[]
     allce=[]
     for i in coldunstva['start']:
-        allc.append(coldunstva['start'][i])
+        allcs.append(coldunstva['start'][i])
     for i in coldunstva['mid']:
-        allc.append(coldunstva['mid'][i])
+        allcm.append(coldunstva['mid'][i])
     for i in coldunstva['end']:
-        allc.append(coldunstva['end'][i])
-    start=random.choice(coldunstva['start'])
-    mid=random.choice(coldunstva['mid'])
-    end=random.choice(coldunstva['end'])
+        allce.append(coldunstva['end'][i])
+    start=random.choice(allcs)
+    mid=random.choice(allcm)
+    end=random.choice(allce)
     zaklinanie={
         'start':start,
         'mid':mid,
