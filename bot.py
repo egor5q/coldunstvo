@@ -242,7 +242,7 @@ def cast(zaklinanie, game, player):
                         
             elif effect['target']=='self':
                 text+='Нанёс себе '+str(effect['amount'])+' урона! Точно ебланище.\n'
-                    player['hp']-=effect['amount']
+                player['hp']-=effect['amount']
                         
             elif 'random' in effect['target']:
                 if 'enemy' not in effect['target']:
