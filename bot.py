@@ -85,13 +85,14 @@ for ids in cend:
     
 @bot.message_handler(commands=['coldunstvo'])
 def coldovatt(m):
-    games.update(creategame(m.chat.id))
-    bot.send_message(m.chat.id, 'Го колдовать, я создал\n/joen для присоединения.')
+    if m.chat.id not in games:
+        games.update(creategame(m.chat.id))
+        bot.send_message(m.chat.id, 'Го колдовать, я создал\n/joen для присоединения.')
     
 @bot.message_handler(commands=['joen'])
 def coldovattjoen(m):
     try:
-        if m.from_user.id not in games[m.chat.id]['players'] and games[m.chat.id]['start']==False:
+        if m.from_user.id not in games[m.chat.id]['players'] and games[m.chat.id]['started']==False:
             games[m.chat.id]['players'].update(createplayer(m.from_user))
             bot.send_message(m.chat.id, m.from_user.first_name+' присоединился!')
     except:
@@ -117,6 +118,7 @@ def begincoldun(id):
         if 'stunned' not in player['effects'] and player['hp']>0:
             turn(game, player)
     bot.send_message(id, game['endturntext'])
+    game['endturntext']=''
     alive=0
     for ids in game['players']:
         player=game['players'][ids]
