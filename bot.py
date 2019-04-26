@@ -70,7 +70,7 @@ cmid={'Осёл':{
                  },
       'Спермоед':{
     'effects':{'heal':effect(target='allenemy', amount=1),
-               'stun':effect(target='self', amount=2)
+               'damage':effect(target='self', amount=1)
               },
     'cost':47,
     'name':'Спермоед'
@@ -87,7 +87,7 @@ cend={'С нижнего Тагила':{
                 },
          
         'Дряхлой бабки':{
-    'effects':{'stun':effect(target='1random', amount=2)
+    'effects':{'stun':effect(target='self', amount=2)
               },
     'cost':47,
     'name':'Дряхлой бабки'
@@ -239,6 +239,10 @@ def cast(zaklinanie, game, player):
                     target=game['players'][idss]
                     if target['id']!=player['id']:
                         target['hp']-=effect['amount']
+                        
+            elif effect['target']=='self':
+                text+='Нанёс себе '+str(effect['amount'])+' урона! Точно ебланище.\n'
+                    player['hp']-=effect['amount']
                         
             elif 'random' in effect['target']:
                 if 'enemy' not in effect['target']:
