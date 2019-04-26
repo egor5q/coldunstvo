@@ -173,8 +173,8 @@ def cast(zaklinanie, game, player):
     text=''
     for ids in zaklinanie:
         name=ids
-    for ids in zaklinanie[ids]['effects']:
-        effect=zaklinanie[ids]['effects'][ids]
+    for ids in zaklinanie[name]['effects']:
+        effect=zaklinanie[name]['effects'][ids]
         if ids=='damage':
             if effect['target']=='all':
                 text+='Нанёс всем '+str(effect['amount'])+' урона!\n'
