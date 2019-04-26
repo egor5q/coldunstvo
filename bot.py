@@ -148,6 +148,9 @@ def turn(game, player):
     allcm=[]
     allce=[]
     for i in coldunstva['start']:
+        print('i=')
+        print(i)
+        print(coldunstva['start'][i])
         allcs.append(coldunstva['start'][i])
     for i in coldunstva['mid']:
         allcm.append(coldunstva['mid'][i])
