@@ -288,12 +288,12 @@ def cast(zaklinanie, game, player):
     
     
 def creategame(chatid):
-    return {
+    return {chatid:{
         'id':chatid,
         'players':{},
         'started':False,
         'endturntext':''
-    }
+    }}
 
 def createplayer(user):
     return {user.id:{
