@@ -163,6 +163,7 @@ def turn(game, player):
     }
     effecttext=''
     for ids in zaklinanie:
+        print(zaklinanie)
         effecttext+=cast(zaklinanie[ids], game, player)
         zakltext+=ids+' '
     game['endturntext']+='Ход игрока '+player['name']+'! Он кастует: '+zakltext+'! Вот, что он сделал:\n'+effecttext+'\n'
