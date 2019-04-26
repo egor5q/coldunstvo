@@ -199,7 +199,11 @@ def cast(zaklinanie, game, player):
                     i=0
                     text+='Нанес '+str(effect['amount'])+' урона колдунам:\n'
                     while i<amount:
-                        target=random.choice(game['players'])
+                        ii=[]
+                        for idss in game['players']:
+                            ii.append(idss)
+                        target=random.choice(ii)
+                        target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
@@ -208,9 +212,17 @@ def cast(zaklinanie, game, player):
                     i=0
                     text+='Нанес '+str(effect['amount'])+' урона соперникам:\n'
                     while i<amount:
-                        target=random.choice(game['players'])
+                        ii=[]
+                        for idss in game['players']:
+                            ii.append(idss)
+                        target=random.choice(ii)
+                        target=game['players'][ii]
                         while target['id']==player['id']:
-                            target=random.choice(game['players'])
+                            ii=[]
+                            for idss in game['players']:
+                                ii.append(idss)
+                            target=random.choice(ii)
+                            target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
@@ -238,7 +250,11 @@ def cast(zaklinanie, game, player):
                     i=0
                     text+='Восстановил '+str(effect['amount'])+' хп колдунам:\n'
                     while i<amount:
-                        target=random.choice(game['players'])
+                        ii=[]
+                        for idss in game['players']:
+                            ii.append(idss)
+                        target=random.choice(ii)
+                        target=game['players'][ii]
                         target['hp']+=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
@@ -247,9 +263,17 @@ def cast(zaklinanie, game, player):
                     i=0
                     text+='Восстановил '+str(effect['amount'])+' хп соперникам:\n'
                     while i<amount:
-                        target=random.choice(game['players'])
+                        ii=[]
+                        for idss in game['players']:
+                            ii.append(idss)
+                        target=random.choice(ii)
+                        target=game['players'][ii]
                         while target['id']==player['id']:
-                            target=random.choice(game['players'])
+                            ii=[]
+                            for idss in game['players']:
+                                ii.append(idss)
+                            target=random.choice(ii)
+                            target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
@@ -287,7 +311,11 @@ def cast(zaklinanie, game, player):
                     i=0
                     text+='Застанил '+str(amount)+' колдунов на '+str(effect['amount'])+' ходов. Пострадавшие:\n'
                     while i<amount:
-                        target=random.choice(game['players'])
+                        ii=[]
+                        for idss in game['players']:
+                            ii.append(idss)
+                        target=random.choice(ii)
+                        target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
@@ -296,9 +324,17 @@ def cast(zaklinanie, game, player):
                     i=0
                     text+='Застанил '+str(amount)+' соперников на '+str(effect['amount'])+' ходов. Пострадавшие:\n'
                     while i<amount:
-                        target=random.choice(game['players'])
+                        ii=[]
+                        for idss in game['players']:
+                            ii.append(idss)
+                        target=random.choice(ii)
+                        target=game['players'][ii]
                         while target['id']==player['id']:
-                            target=random.choice(game['players'])
+                            ii=[]
+                            for idss in game['players']:
+                                ii.append(idss)
+                            target=random.choice(ii)
+                            target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
