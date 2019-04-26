@@ -108,6 +108,7 @@ def coldovattstart(m):
         begincoldun(m.chat.id)
     except:
         bot.send_message(m.chat.id, 'Здесь нет игры ебать!')
+        bot.send_message(441399484, traceback.format_exc())
             
     
     
