@@ -35,7 +35,7 @@ cstart={'Ебанутый':{
          
         'Ебущий':{
     'effects':{'damage':effect(target='allenemy', amount=1),
-               'stun':effect(target='1random', amount=1)
+               'stun':effect(target='1random', amount=2)
               },
     'cost':47
 
@@ -51,7 +51,7 @@ cmid={'Осёл':{
          
         'Пидорас':{
     'effects':{'heal':effect(target='self', amount=2),
-               'stun':effect(target='1random', amount=1)
+               'stun':effect(target='1random', amount=2)
               },
     'cost':47
 
@@ -66,7 +66,7 @@ cend={'С нижнего Тагила':{
                 },
          
         'Дряхлой бабки':{
-    'effects':{'stun':effect(target='2random', amount=2)
+    'effects':{'stun':effect(target='2random', amount=3)
               },
     'cost':47
 
@@ -116,10 +116,16 @@ def begincoldun(id):
     game=games[id]
     for ids in game['players']:
         player=game['players'][ids]
-        if 'stunned' not in player['effects'] and player['hp']>0:
+        if 'stun' not in player['effects'] and player['hp']>0:
             turn(game, player)
     bot.send_message(id, game['endturntext'])
     game['endturntext']=''
+    for ids in game['players']:
+        player=game['players'][ids]
+        try:
+            player['effects'].remove('stun')
+        except:
+            pass
     alive=0
     for ids in game['players']:
         player=game['players'][ids]
@@ -354,7 +360,8 @@ def createplayer(user):
     return {user.id:{
         'id':user.id,
         'hp':20,
-        'effects':[]
+        'effects':[],
+        'name':user.first_name
     }
            }
 
