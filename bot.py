@@ -122,15 +122,24 @@ def begincoldun(id):
     game=games[id]
     for ids in game['players']:
         player=game['players'][ids]
-        if player['stun']<=0 and player['hp']>0:
+        if player['stunned']==False and player['hp']>0:
             turn(game, player)
-    bot.send_message(id, game['endturntext'])
+    try:
+        bot.send_message(id, game['endturntext'])
+    except:
+        bot.send_message(id, 'Нихуя не произошло!')
+    for ids in game['players']:
+        player=game['players'][ids]
+        if player['stun']>0:
+            player['stunned']=True
     game['endturntext']=''
     for ids in game['players']:
         player=game['players'][ids]
         try:
             if player['stun']>0:
                 player['stun']-=1
+                if player['stun']==0:
+                    player['stunned']=False
         except:
             pass
     alive=0
@@ -369,7 +378,8 @@ def createplayer(user):
         'hp':20,
         'effects':[],
         'name':user.first_name,
-        'stun':0
+        'stun':0,
+        'stunned':False
     }
            }
 
