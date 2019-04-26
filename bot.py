@@ -15,6 +15,13 @@ bot = telebot.TeleBot(token)
 
 games={}
 
+def effect(target='all', amount=0):
+      return {
+          'target':target,
+          'amount':amount
+      }
+    
+
 coldunstva={
     'start':{},
     'mid':{},
@@ -75,12 +82,6 @@ for ids in cend:
     coldunstva['end'].update(cend[ids])
     
 
-def effect(target='all', amount=0):
-      return {
-          'target':target,
-          'amount':amount
-      }
-    
     
 @bot.message_handler(commands=['coldunstvo'])
 def coldovatt(m):
