@@ -36,7 +36,7 @@ cstart={'Ебанутый':{
          
         'Ебущий':{
     'effects':{'damage':effect(target='allenemy', amount=1),
-               'stun':effect(target='1random', amount=2)
+               'damage':effect(target='1random', amount=2)
               },
     'cost':47,
      'name':'Ебущий'
@@ -44,7 +44,7 @@ cstart={'Ебанутый':{
                  },
         'Дохлый':{
     'effects':{'damage':effect(target='allenemy', amount=2),
-               'stun':effect(target='1random', amount=2)
+               'heal':effect(target='1random', amount=1)
               },
     'cost':47,
      'name':'Дохлый'
@@ -327,7 +327,7 @@ def cast(zaklinanie, game, player):
                 
         if ids=='stun':
             if effect['target']=='all':
-                text+='Застанил всех игроков на '+str(effect['amount'])+' ходов!\n'
+                text+='Застанил всех игроков на '+str(effect['amount']-1)+' ходов!\n'
                 for idss in game['players']:
                     target=game['players'][idss]
                     i=0
@@ -336,7 +336,7 @@ def cast(zaklinanie, game, player):
                         i+=1
                                 
             elif effect['target']=='allenemy':
-                text+='Застанил всех своих врагов на '+str(effect['amount'])+' ходов!\n'
+                text+='Застанил всех своих врагов на '+str(effect['amount']-1)+' ходов!\n'
                 for idss in game['players']:
                     target=game['players'][idss]
                     if target['id']!=player['id']:
@@ -346,7 +346,7 @@ def cast(zaklinanie, game, player):
                             i+=1
             
             elif effect['target']=='self':
-                text+='Застанил себя на '+str(effect['amount'])+' ходов! Ебланище.\n'
+                text+='Застанил себя на '+str(effect['amount']-1)+' ходов! Ебланище.\n'
                 i=0
                 while i<effect['amount']:
                     player['stun']+=1
@@ -356,7 +356,7 @@ def cast(zaklinanie, game, player):
                 if 'enemy' not in effect['target']:
                     amount=int(effect['target'].split('random')[0])
                     i=0
-                    text+='Застанил '+str(amount)+' колдунов на '+str(effect['amount'])+' ходов. Пострадавшие:\n'
+                    text+='Застанил '+str(amount)+' колдунов на '+str(effect['amount']-1)+' ходов. Пострадавшие:\n'
                     while i<amount:
                         ii=[]
                         for idss in game['players']:
@@ -369,7 +369,7 @@ def cast(zaklinanie, game, player):
                 else:
                     amount=int(effect['target'].split('random')[0])
                     i=0
-                    text+='Застанил '+str(amount)+' соперников на '+str(effect['amount'])+' ходов. Пострадавшие:\n'
+                    text+='Застанил '+str(amount)+' соперников на '+str(effect['amount']-1)+' ходов. Пострадавшие:\n'
                     while i<amount:
                         ii=[]
                         for idss in game['players']:
