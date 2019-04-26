@@ -75,11 +75,11 @@ cend={'С нижнего Тагила':{
        }
 
 for ids in cstart:
-    coldunstva['start'].update(cstart[ids])
+    coldunstva['start'].update(ids:cstart[ids])
 for ids in cmid:
-    coldunstva['mid'].update(cmid[ids])
+    coldunstva['mid'].update(ids:cmid[ids])
 for ids in cend:
-    coldunstva['end'].update(cend[ids])
+    coldunstva['end'].update(ids:cend[ids])
     
 
     
