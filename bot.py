@@ -30,14 +30,16 @@ coldunstva={
 cstart={'Ебанутый':{
     'effects':{'damage':effect(target='all', amount=2)
               },
-    'cost':47
+    'cost':47,
+    'name':'Ебанутый'
                 },
          
         'Ебущий':{
     'effects':{'damage':effect(target='allenemy', amount=1),
                'stun':effect(target='1random', amount=2)
               },
-    'cost':47
+    'cost':47,
+     'name':'Ебущий'
 
                  }
           
@@ -46,14 +48,16 @@ cstart={'Ебанутый':{
 cmid={'Осёл':{
     'effects':{'damage':effect(target='allenemy', amount=3)
               },
-    'cost':47
+    'cost':47,
+    'name':'Осёл'
                 },
          
         'Пидорас':{
     'effects':{'heal':effect(target='self', amount=2),
                'stun':effect(target='1random', amount=2)
               },
-    'cost':47
+    'cost':47,
+    'name':'Пидорас'
 
                  }
           
@@ -62,13 +66,15 @@ cmid={'Осёл':{
 cend={'С нижнего Тагила':{
     'effects':{'heal':effect(target='all', amount=1)
               },
-    'cost':47
+    'cost':47,
+    'name':'С нижнего Тагила'
                 },
          
         'Дряхлой бабки':{
     'effects':{'stun':effect(target='2random', amount=3)
               },
-    'cost':47
+    'cost':47,
+    'name':'Дряхлой бабки'
 
                  }
           
@@ -116,14 +122,15 @@ def begincoldun(id):
     game=games[id]
     for ids in game['players']:
         player=game['players'][ids]
-        if 'stun' not in player['effects'] and player['hp']>0:
+        if player['stun']<=0 and player['hp']>0:
             turn(game, player)
     bot.send_message(id, game['endturntext'])
     game['endturntext']=''
     for ids in game['players']:
         player=game['players'][ids]
         try:
-            player['effects'].remove('stun')
+            if player['stun']>0:
+                player['stun']-=1
         except:
             pass
     alive=0
@@ -134,7 +141,7 @@ def begincoldun(id):
     if alive<=1:
         endgame(game)
     else:
-        t=threading.Timer(10, begincoldun, args=[id])
+        t=threading.Timer(20, begincoldun, args=[id])
         t.start()
     
 def endgame(game):
@@ -142,7 +149,7 @@ def endgame(game):
     for ids in game['players']:
         player=game['players'][ids]
         if player['hp']>0:
-            alivetext+=player['name']+'\n'
+            text+=player['name']+'\n'
     if text=='Игра окончена! Выжившие:\n':
         text+='Выживших нет! ВСЕ СДОХЛИ НАХУУУЙ!'
     bot.send_message(game['id'], text)
@@ -175,7 +182,7 @@ def turn(game, player):
     for ids in zaklinanie:
         print(zaklinanie)
         effecttext+=cast(zaklinanie[ids], game, player)
-        zakltext+=ids+' '
+        zakltext+=zaklinanie[ids]['name']+' '
     game['endturntext']+='Ход игрока '+player['name']+'! Он кастует: '+zakltext+'! Вот, что он сделал:\n'+effecttext+'\n'
     
     
@@ -291,7 +298,7 @@ def cast(zaklinanie, game, player):
                     target=game['players'][idss]
                     i=0
                     while i<effect['amount']:
-                        target['effects'].append('stun')
+                        target['stun']+=1
                         i+=1
                                 
             elif effect['target']=='allenemy':
@@ -301,14 +308,14 @@ def cast(zaklinanie, game, player):
                     if target['id']!=player['id']:
                         i=0
                         while i<effect['amount']:
-                            target['effects'].append('stun')
+                            target['stun']+=1
                             i+=1
             
             elif effect['target']=='self':
                 text+='Застанил себя на '+str(effect['amount'])+' ходов! Ебланище.\n'
                 i=0
                 while i<effect['amount']:
-                    player['effects'].append('stun')
+                    player['stun']+=1
                     i+=1
                 
             elif 'random' in effect['target']:
@@ -322,7 +329,7 @@ def cast(zaklinanie, game, player):
                             ii.append(idss)
                         ii=random.choice(ii)
                         target=game['players'][ii]
-                        target['hp']-=effect['amount']
+                        target['stun']+=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
                 else:
@@ -341,7 +348,7 @@ def cast(zaklinanie, game, player):
                                 ii.append(idss)
                             ii=random.choice(ii)
                             target=game['players'][ii]
-                        target['hp']-=effect['amount']
+                        target['stun']+=effect['amount']
                         text+=target['name']+'\n'
                         i+=1
                 
@@ -361,7 +368,8 @@ def createplayer(user):
         'id':user.id,
         'hp':20,
         'effects':[],
-        'name':user.first_name
+        'name':user.first_name,
+        'stun':0
     }
            }
 
