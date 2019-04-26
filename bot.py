@@ -165,6 +165,7 @@ def turn(game, player):
         'end':end
     }
     effecttext=''
+    zakltext=''
     for ids in zaklinanie:
         print(zaklinanie)
         effecttext+=cast(zaklinanie[ids], game, player)
