@@ -96,6 +96,7 @@ def coldovattjoen(m):
             bot.send_message(m.chat.id, m.from_user.first_name+' присоединился!')
     except:
         bot.send_message(m.chat.id, 'Тут еще нет игры ебать.')
+        bot.send_message(441399484, traceback.format_exc())
         
         
 @bot.message_handler(commands=['gogogo'])
