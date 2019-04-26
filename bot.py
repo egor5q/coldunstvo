@@ -202,7 +202,7 @@ def cast(zaklinanie, game, player):
                         ii=[]
                         for idss in game['players']:
                             ii.append(idss)
-                        target=random.choice(ii)
+                        ii=random.choice(ii)
                         target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
@@ -215,13 +215,13 @@ def cast(zaklinanie, game, player):
                         ii=[]
                         for idss in game['players']:
                             ii.append(idss)
-                        target=random.choice(ii)
+                        ii=random.choice(ii)
                         target=game['players'][ii]
                         while target['id']==player['id']:
                             ii=[]
                             for idss in game['players']:
                                 ii.append(idss)
-                            target=random.choice(ii)
+                            ii=random.choice(ii)
                             target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
@@ -253,7 +253,7 @@ def cast(zaklinanie, game, player):
                         ii=[]
                         for idss in game['players']:
                             ii.append(idss)
-                        target=random.choice(ii)
+                        ii=random.choice(ii)
                         target=game['players'][ii]
                         target['hp']+=effect['amount']
                         text+=target['name']+'\n'
@@ -266,13 +266,13 @@ def cast(zaklinanie, game, player):
                         ii=[]
                         for idss in game['players']:
                             ii.append(idss)
-                        target=random.choice(ii)
+                        ii=random.choice(ii)
                         target=game['players'][ii]
                         while target['id']==player['id']:
                             ii=[]
                             for idss in game['players']:
                                 ii.append(idss)
-                            target=random.choice(ii)
+                            ii=random.choice(ii)
                             target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
@@ -314,7 +314,7 @@ def cast(zaklinanie, game, player):
                         ii=[]
                         for idss in game['players']:
                             ii.append(idss)
-                        target=random.choice(ii)
+                        ii=random.choice(ii)
                         target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
@@ -327,13 +327,13 @@ def cast(zaklinanie, game, player):
                         ii=[]
                         for idss in game['players']:
                             ii.append(idss)
-                        target=random.choice(ii)
+                        ii=random.choice(ii)
                         target=game['players'][ii]
                         while target['id']==player['id']:
                             ii=[]
                             for idss in game['players']:
                                 ii.append(idss)
-                            target=random.choice(ii)
+                            ii=random.choice(ii)
                             target=game['players'][ii]
                         target['hp']-=effect['amount']
                         text+=target['name']+'\n'
