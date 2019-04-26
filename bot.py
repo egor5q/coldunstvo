@@ -133,10 +133,12 @@ def coldovattjoen(m):
 @bot.message_handler(commands=['gogogo'])
 def coldovattstart(m):
     try:
-        if games[m.chat.id]['started']==False:
+        if games[m.chat.id]['started']==False and len(games[m.chat.id]['players'])>1:
             games[m.chat.id]['started']=True
             bot.send_message(m.chat.id, 'ПОИХАЛИ КОЛДОВАТЬ!')
             begincoldun(m.chat.id)
+        else:
+            bot.send_message(m.chat.id, 'Недостаточно игроков ебланище!')
     except:
         bot.send_message(m.chat.id, 'Здесь нет игры ебать!')
         bot.send_message(441399484, traceback.format_exc())
