@@ -44,7 +44,7 @@ cstart={'Ебанутый':{
                  },
         'Дохлый':{
     'effects':{'damage':effect(target='allenemy', amount=2),
-               'stun':effect(target='3random', amount=2)
+               'stun':effect(target='1random', amount=2)
               },
     'cost':47,
      'name':'Дохлый'
@@ -87,18 +87,18 @@ cend={'С нижнего Тагила':{
                 },
          
         'Дряхлой бабки':{
-    'effects':{'stun':effect(target='2random', amount=3)
+    'effects':{'stun':effect(target='1random', amount=2)
               },
     'cost':47,
     'name':'Дряхлой бабки'
 
                  },
-      'Спидозного осла':{
-    'effects':{'stun':effect(target='1randomenemy', amount=3),
+      'Спидозного мамонта':{
+    'effects':{'dagame':effect(target='1randomenemy', amount=3),
                'heal':effect(target='self', amount=3),
               },
     'cost':47,
-    'name':'Спидозного осла'
+    'name':'Спидозного мамонта'
 
                  }
           
@@ -133,9 +133,10 @@ def coldovattjoen(m):
 @bot.message_handler(commands=['gogogo'])
 def coldovattstart(m):
     try:
-        games[m.chat.id]['started']=True
-        bot.send_message(m.chat.id, 'ПОИХАЛИ КОЛДОВАТЬ!')
-        begincoldun(m.chat.id)
+        if games[m.chat.id]['started']==False:
+            games[m.chat.id]['started']=True
+            bot.send_message(m.chat.id, 'ПОИХАЛИ КОЛДОВАТЬ!')
+            begincoldun(m.chat.id)
     except:
         bot.send_message(m.chat.id, 'Здесь нет игры ебать!')
         bot.send_message(441399484, traceback.format_exc())
