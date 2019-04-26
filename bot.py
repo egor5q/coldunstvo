@@ -41,7 +41,15 @@ cstart={'Ебанутый':{
     'cost':47,
      'name':'Ебущий'
 
-                 }
+                 },
+        'Дохлый':{
+    'effects':{'damage':effect(target='allenemy', amount=2),
+               'stun':effect(target='3random', amount=2)
+              },
+    'cost':47,
+     'name':'Дохлый'
+
+                 },
           
        }
 
@@ -59,6 +67,14 @@ cmid={'Осёл':{
     'cost':47,
     'name':'Пидорас'
 
+                 },
+      'Спермоед':{
+    'effects':{'heal':effect(target='allenemy', amount=1),
+               'stun':effect(target='self', amount=2)
+              },
+    'cost':47,
+    'name':'Спермоед'
+
                  }
           
        }
@@ -75,6 +91,14 @@ cend={'С нижнего Тагила':{
               },
     'cost':47,
     'name':'Дряхлой бабки'
+
+                 },
+      'Спидозного осла':{
+    'effects':{'stun':effect(target='1randomenemy', amount=3),
+               'heal':effect(target='self', amount=3),
+              },
+    'cost':47,
+    'name':'Спидозного осла'
 
                  }
           
@@ -125,7 +149,7 @@ def begincoldun(id):
         if player['stunned']==False and player['hp']>0:
             turn(game, player)
     try:
-        bot.send_message(id, game['endturntext'])
+        bot.send_message(id, game['endturntext'], parse_mode='markdown')
     except:
         bot.send_message(id, 'Нихуя не произошло!')
     for ids in game['players']:
@@ -192,7 +216,7 @@ def turn(game, player):
         print(zaklinanie)
         effecttext+=cast(zaklinanie[ids], game, player)
         zakltext+=zaklinanie[ids]['name']+' '
-    game['endturntext']+='Ход игрока '+player['name']+'! Он кастует: '+zakltext+'! Вот, что он сделал:\n'+effecttext+'\n'
+    game['endturntext']+='Ход игрока '+player['name']+'! Он кастует: *'+zakltext+'*! Вот, что он сделал:\n'+effecttext+'\n'
     
     
 def cast(zaklinanie, game, player):
