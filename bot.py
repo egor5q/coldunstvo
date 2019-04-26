@@ -144,6 +144,15 @@ def endgame(game):
     
     
 def turn(game, player):
+    allcs=[]
+    allcm=[]
+    allce=[]
+    for i in coldunstva['start']:
+        allc.append(coldunstva['start'][i])
+    for i in coldunstva['mid']:
+        allc.append(coldunstva['mid'][i])
+    for i in coldunstva['end']:
+        allc.append(coldunstva['end'][i])
     start=random.choice(coldunstva['start'])
     mid=random.choice(coldunstva['mid'])
     end=random.choice(coldunstva['end'])
@@ -155,7 +164,8 @@ def turn(game, player):
     effecttext=''
     for ids in zaklinanie:
         effecttext+=cast(zaklinanie[ids], game, player)
-    game['endturntext']+='Ход игрока '+player['name']+'! Вот, что он сделал:\n'+effecttext+'\n'
+        zakltext+=ids+' '
+    game['endturntext']+='Ход игрока '+player['name']+'! Он кастует: '+zakltext+'! Вот, что он сделал:\n'+effecttext+'\n'
     
     
 def cast(zaklinanie, game, player):
